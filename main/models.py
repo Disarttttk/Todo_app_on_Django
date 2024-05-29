@@ -2,8 +2,9 @@ from django.db import models
 
 
 class ToDoNote(models.Model):
-    content = models.TextField()
+    content = models.TextField(verbose_name='Запись')
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
+    is_completed = models.BooleanField(default=False, verbose_name='статус')
 
     class Meta:
         db_table = 'ToDoNote'
