@@ -22,18 +22,18 @@
 
 <body class="standard">
     <div id = "header">
-        <div class="flexrow-container">
-            <div class="standard-theme theme-selector"></div>
-            <div class="light-theme theme-selector"></div>
-            <div class="darker-theme theme-selector"></div>
-        </div>
+<!--        <div class="flexrow-container">-->
+<!--            <div class="standard-theme theme-selector"></div>-->
+<!--            <div class="light-theme theme-selector"></div>-->
+<!--            <div class="darker-theme theme-selector"></div>-->
+<!--        </div>-->
 
         <h1 id="title">Just do it.<div id="border"></div></h1>
 
     </div>
 
   <div id="form">
-        <form method="post">
+        <form method="post" action="{% url 'main:note_add' %}">
             {% csrf_token %}
             <input class="standard-input" id="{{ form.content.id_for_label }}" name="{{ form.content.html_name }}" type="text" placeholder="Add a task." autocomplete="off">
             <button class="todo-btn standard-button" type="submit">I Got This!</button>
@@ -53,19 +53,13 @@
   <div id="myUnOrdList">
         <ul class="todo-list">
             {% for item in items %}
-            <div class="todo standard-todo">
 
+            <div {% if item.is_completed %} class="todo standard-todo completed" {% else %} class="todo standard-todo" {% endif %}>
                 <li class="todo-item">{{ item.content }}</li>
-                <button class="check-btn standard-button"><i class="fas fa-check"></i></button>
+                <button class="check-btn standard-button" type="submit" data-id="{{ item.id }}" data-note-check-url="{% url 'main:note_check' %}">{% csrf_token %}<i class="fas fa-check"></i></button>
                 <button class="delete-btn standard-button" type="submit" data-id="{{ item.id }}" data-note-delete-url="{% url 'main:note_delete' %}">{% csrf_token %}<i class="fas fa-trash"></i></button>
-<!--                <form action="{% url 'main:note_delete' %}" method="post">-->
-<!--                    -->
-<!--                    {% csrf_token %}-->
-<!--                    <input class="standard-input" type="hidden" name="note_id" value="{{ item.id }}">-->
-<!--                    -->
-<!--                </form>-->
-
             </div>
+
             {% endfor %}
         </ul>
     </div>
@@ -78,38 +72,5 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!--    <script src="{% static 'JS/main.js' %}" type="text/javascript"> </script>-->
-<script src="{% static 'JS/remove-note-ajax.js' %}"></script>
+<script src="{% static 'JS/note-ajax.js' %}"></script>
 
-
-<!--$(document).ready(function() {-->
-<!--    // Обработчик нажатия на кнопку удаления-->
-<!--    $('.delete-btn').on('click', function(e) {-->
-<!--        e.preventDefault();-->
-<!--        var itemId = $(this).data('id'); // Получаем ID элемента-->
-<!--        var url = $(this).data("note-delete-url");-->
-<!--        $.ajax({-->
-<!--            url: url, // URL, который обрабатывает удаление-->
-<!--            type: 'POST',-->
-<!--            data: JSON.stringify({ id: itemId }),-->
-<!--            contentType: 'application/json; charset=utf-8',-->
-<!--            dataType: 'json',-->
-<!--            headers: {-->
-<!--              'X-CSRFToken': getCSRFToken() // Функция getCSRFToken должна возвращать текущий CSRF токен-->
-<!--            },-->
-<!--            success: function(response) {-->
-<!--                if(response.success) {-->
-<!--                    // Если сервер подтвердил удаление, удаляем элемент из DOM-->
-<!--                    $('#item-' + itemId).remove(); // ID элемента DOM должен быть формата 'item-1', 'item-2' и т. д.-->
-<!--                } else {-->
-<!--                    // Обрабатываем ошибку, если сервер вернул ошибку-->
-<!--                    alert('Ошибка при удалении: ' + response.error);-->
-<!--                }-->
-<!--            },-->
-<!--            error: function(xhr, status, error) {-->
-<!--                // Обработка ошибки AJAX запроса-->
-<!--                console.error('Ошибка AJAX запроса:', error);-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--});-->

@@ -11,13 +11,13 @@ from .models import ToDoNote
 
 
 def index(request):
-    if request.method == 'POST':
-        form = TodoItemForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main:index')
-    else:
-        form = TodoItemForm()
+    # if request.method == 'POST':
+    #     form = TodoItemForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('main:index')
+    # else:
+    form = TodoItemForm()
 
     items = ToDoNote.objects.all()
 
@@ -30,6 +30,14 @@ def index(request):
 
 
 @require_POST
+def note_add(request):
+    form = TodoItemForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('main:index')
+    return redirect('main:index')
+
+
 def note_delete(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -41,4 +49,21 @@ def note_delete(request):
         except ToDoNote.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Объект не найден'}, status=404)
 
+    return JsonResponse({'success': False, 'error': 'Некорректный запрос'}, status=400)
+
+
+def note_check(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        item_id = data.get('id')
+        try:
+            note = ToDoNote.objects.get(pk=item_id)
+            if note.is_completed:
+                note.is_completed = False
+            else:
+                note.is_completed = True
+            note.save()
+            return JsonResponse({'success': True})
+        except ToDoNote.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Объект не найден'}, status=404)
     return JsonResponse({'success': False, 'error': 'Некорректный запрос'}, status=400)
