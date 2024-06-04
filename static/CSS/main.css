@@ -378,3 +378,29 @@ form button {
         box-shadow: 0 0 5px lightgray;
     }
 }
+
+.floating-button {
+  text-decoration: none;
+  display: inline-block;
+  width: 100px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  margin: 10px 20px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  background-color: rgb(247, 226, 223);
+  color: rgb(0, 0, 0);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+  transition: .3s;
+}
+.floating-button:hover {
+  background-color: white;
+  box-shadow: #fff8 0 0 10px;
+  transform: translateY(-7px);
+}
+

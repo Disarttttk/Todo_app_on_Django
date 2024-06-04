@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         parentElement.remove(); // Удаление элемента из DOM после анимации
       }
       // Отправляем AJAX запрос на сервер
-      fetch(url, { // Измените URL на URL вашего обработчика удаления
+      fetch(url, {
         method: 'POST',
         body: JSON.stringify({id: itemId}),
         headers: {
