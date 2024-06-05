@@ -11,16 +11,12 @@ from .models import ToDoNote
 
 
 def index(request):
-    # if request.method == 'POST':
-    #     form = TodoItemForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('main:index')
-    # else:
+    # user_id = request.POST.get('user_id')
     form = TodoItemForm()
-
-    items = ToDoNote.objects.all()
-
+    if request.user.is_authenticated:
+        items = ToDoNote.objects.filter(user=request.user)
+    else:
+        items = ToDoNote.objects.filter(user=None)
     context = {
         'title': 'Главная страница',
         'items': items,
@@ -31,10 +27,14 @@ def index(request):
 
 @require_POST
 def note_add(request):
-    form = TodoItemForm(request.POST)
+    form = TodoItemForm(data=request.POST)
     if form.is_valid():
-        form.save()
-        return redirect('main:index')
+        if request.user.is_authenticated:
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+        else:
+            form.save()
     return redirect('main:index')
 
 
