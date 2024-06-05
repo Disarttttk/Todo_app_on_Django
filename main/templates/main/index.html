@@ -26,7 +26,11 @@
 <!--            <div class="standard-theme theme-selector"></div>-->
 <!--            <div class="light-theme theme-selector"></div>-->
 <!--            <div class="darker-theme theme-selector"></div>-->
-            <a class="floating-button" href="{% url 'user:login'%}">login</a>
+            {% if not user.is_authenticated %}
+            <a class="floating-button" href="{% url 'user:login'%}">Sign in</a>
+            {% else %}
+
+            {% endif %}
         </div>
 
         <h1 id="title">Just do it.<div id="border"></div></h1>
@@ -34,7 +38,9 @@
     </div>
 
   <div id="form">
+
         <form method="post" action="{% url 'main:note_add' %}">
+
             {% csrf_token %}
             <input class="standard-input" id="{{ form.content.id_for_label }}" name="{{ form.content.html_name }}" type="text" placeholder="Add a task." autocomplete="off">
             <button class="todo-btn standard-button" type="submit">I Got This!</button>
