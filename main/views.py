@@ -11,12 +11,18 @@ from .models import ToDoNote
 
 
 def index(request):
-    # user_id = request.POST.get('user_id')
+
     form = TodoItemForm()
+
     if request.user.is_authenticated:
         items = ToDoNote.objects.filter(user=request.user)
+
+    elif request.session.session_key:
+        items = ToDoNote.objects.filter(session_key=request.session.session_key)
+
     else:
-        items = ToDoNote.objects.filter(user=None)
+        items = None
+
     context = {
         'title': 'Главная страница',
         'items': items,
@@ -34,7 +40,11 @@ def note_add(request):
             instance.user = request.user
             instance.save()
         else:
-            form.save()
+            if not request.session.session_key:
+                request.session.create()
+            instance = form.save(commit=False)
+            instance.session_key = request.session.session_key
+            instance.save()
     return redirect('main:index')
 
 

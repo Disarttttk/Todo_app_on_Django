@@ -1,0 +1,109 @@
+body {
+    background-image: linear-gradient(100deg, #575656, #062e3f);
+    color: #ffdfdb;
+    font-family: 'Work Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    width: 500px;
+    height: 700px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #181a1a;
+    color: rgb(247, 226, 223);
+    border: none;
+    outline: none;
+    border-radius: 17px;
+    font-size: 16px;
+}
+
+
+/* Input themes */
+form input.standard-input {
+    background-color: #181a1a;
+    color: rgb(247, 226, 223);
+}
+
+form input:hover {
+    cursor: text;
+}
+
+form input.standard-input:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+
+
+
+button {
+    padding: 10px;
+    margin-top: 20px;
+    transition: box-shadow 200ms ease, background-color 200ms ease-in-out;
+    background-color: rgb(247, 226, 223);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 17px;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+button:hover {
+    background-color: white;
+    box-shadow: #fff8 0 0 10px;
+}
+
+/* Стиль для сообщений об ошибках */
+.alert {
+    display: none;  /* По умолчанию скрыто */
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    z-index: 1000;
+    white-space: pre-line;  /* Это позволит отображать переносы строк */
+}
+
+
+/* Анимация для показа и скрытия */
+.show {
+    display: block;
+    animation: slide-down 0.5s ease;
+}
+
+@keyframes slide-down {
+    from {
+        top: -50px;
+    }
+    to {
+        top: 50px;
+    }
+}

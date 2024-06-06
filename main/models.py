@@ -8,6 +8,7 @@ class ToDoNote(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
     is_completed = models.BooleanField(default=False, verbose_name='Статус')
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Пользователь')
+    session_key = models.CharField(max_length=32, null=True, blank=True)
 
     class Meta:
         db_table = 'ToDoNote'

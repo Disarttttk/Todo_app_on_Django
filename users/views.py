@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from .forms import UserLoginForm, UserRegistrationForm
+from main.models import ToDoNote
 
 
 def login(request):
@@ -15,9 +16,13 @@ def login(request):
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
+            session_key = request.session.session_key
             if user:
                 auth.login(request, user)
+                if session_key:
+                    ToDoNote.objects.filter(session_key=session_key).update(user=user)
                 return redirect('main:index')
+
 
     else:
         form = UserLoginForm()
@@ -35,7 +40,10 @@ def registration(request):
         if form.is_valid():
             form.save()
             user = form.instance
+            session_key = request.session.session_key
             auth.login(request, user)
+            if session_key:
+                ToDoNote.objects.filter(session_key=session_key).update(user=user)
             return redirect('main:index')
     else:
         form = UserRegistrationForm()
@@ -47,8 +55,9 @@ def registration(request):
     return render(request=request, template_name='users/registration.html', context=context)
 
 
+@login_required
 def profile(request):
-    return HttpResponse('Профиль')
+    return render(request=request, template_name='users/profile.html')
 
 
 @login_required
