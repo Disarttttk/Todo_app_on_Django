@@ -1,11 +1,13 @@
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .forms import UserLoginForm, UserRegistrationForm
+from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from main.models import ToDoNote
+
+from .models import User
 
 
 def login(request):
@@ -57,7 +59,19 @@ def registration(request):
 
 @login_required
 def profile(request):
-    return render(request=request, template_name='users/profile.html')
+    user = request.user
+
+    if request.method == 'POST':
+        form = UserProfileForm(data=request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user:profile')
+
+    form = UserProfileForm(instance=user)
+    context = {
+        'form': form
+    }
+    return render(request=request, template_name='users/profile.html', context=context)
 
 
 @login_required

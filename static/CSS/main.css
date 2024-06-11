@@ -196,7 +196,7 @@ form input.darker-input:hover {
 
 button {
     border: none;
-    outline: none; 
+    outline: none;
     transition: box-shadow 200ms ease, background-color 200ms ease-in-out;
 }
 
@@ -411,69 +411,71 @@ form button {
 
 /* Style The Dropdown Button */
 .dropbtn {
-  text-decoration: none;
-  display: inline-block;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 17px;
-  font-size: 20px;
-  font-family: sans-serif;
-  text-align: center;
-  background-color: rgb(247, 226, 223);
-  color: rgb(0, 0, 0);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
-  transition: .3s;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 17px;
+    font-size: 20px;
+    font-family: sans-serif;
+    text-align: center;
+    transition: box-shadow 200ms ease, background-color 200ms ease-in-out;
+    background-color: rgb(247, 226, 223);
+    color: rgb(0, 0, 0);
+    border: none;
+
+    transition: .3s;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-  position: relative;
-  top: -30px;
-  display: inline-block;
+    position: absolute; /* Изменено на absolute для более точного позиционирования */
+    top: 20px; /* Регулируйте значение в зависимости от потребностей */
+    right: 20px; /* Размещение в правом верхнем углу */
+    display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  display: none;
-  position: absolute;
-  border-radius: 17px;
-  background-color: #181a1a;
-  color: rgb(247, 226, 223);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
-  transition: .3s;
-  z-index: 1;
+    display: none;
+    position: absolute;
+    border-radius: 17px;
+    background-color: #181a1a;
+    color: rgb(247, 226, 223);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+    z-index: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  color: #ffdfdb;
-  text-align: center;
-
-  line-height: 40px;
-  font-family: sans-serif;
-  font-size: 20px;
-  width: 100px;
-  height: 40px;
-  text-decoration: none;
-  display: block;
+    color: #ffdfdb;
+    text-align: center;
+    line-height: 40px;
+    font-family: sans-serif;
+    font-size: 20px;
+    width: 100px;
+    height: 40px;
+    text-decoration: none;
+    display: block;
 }
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-  border-radius: 17px;
- background-color: rgb(0, 0, 0);
+    border-radius: 17px;
+    background-color: rgb(0, 0, 0);
 }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-  display: block;
+    display: block;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     border-radius: 17px;
     background-color: white;
-  box-shadow: #fff8 0 0 10px;
-  transform: translateY(-7px);
+    box-shadow: #fff8 0 0 10px;
+    transform: translateY(-7px);
 }

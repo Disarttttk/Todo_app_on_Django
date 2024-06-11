@@ -13,7 +13,7 @@
 
 <body>
     <div class="login-container">
-        <h1>Register</h1>
+        <h1>Registration</h1>
         <form action="{% url 'user:registration' %}" method="post">
             {% csrf_token %}
             <input class="standard-input" type="text" id="id_username" name="username" placeholder="Username" required>

@@ -23,9 +23,6 @@
 <body class="standard">
     <div id = "header">
         <div class="flexrow-container">
-<!--            <div class="standard-theme theme-selector"></div>-->
-<!--            <div class="light-theme theme-selector"></div>-->
-<!--            <div class="darker-theme theme-selector"></div>-->
             {% if not user.is_authenticated %}
             <a class="floating-button left" href="{% url 'user:login'%}">Sign in</a>
 

@@ -7,21 +7,35 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    position: relative; /* добавлено для контекста абсолютного позиционирования */
 }
 
+.main-container {
+    position: relative; /* Контейнер для всего содержимого */
+}
+
+/* Theme buttons div */
 .login-container {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-    width: 500px;
-    height: 700px;
+    width: 400px;
+    height: 450px;
+}
+
+img {
+    max-width: 150px;
+    margin-bottom: 0px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
     font-size: 36px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    margin-top: 0px;
 }
 
 form {
@@ -41,8 +55,6 @@ input[type="password"] {
     font-size: 16px;
 }
 
-
-/* Input themes */
 form input.standard-input {
     background-color: #181a1a;
     color: rgb(247, 226, 223);
@@ -56,10 +68,7 @@ form input.standard-input:hover {
     background-color: rgb(0, 0, 0);
 }
 
-
-
-
-button {
+.btn {
     padding: 10px;
     margin-top: 20px;
     transition: box-shadow 200ms ease, background-color 200ms ease-in-out;
@@ -69,10 +78,9 @@ button {
     border-radius: 17px;
     font-size: 16px;
     cursor: pointer;
-
 }
 
-button:hover {
+.btn:hover {
     background-color: white;
     box-shadow: #fff8 0 0 10px;
 }
@@ -92,7 +100,6 @@ button:hover {
     white-space: pre-line;  /* Это позволит отображать переносы строк */
 }
 
-
 /* Анимация для показа и скрытия */
 .show {
     display: block;
@@ -106,4 +113,75 @@ button:hover {
     to {
         top: 50px;
     }
+}
+
+/* Style The Dropdown Button */
+.dropbtn {
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 38px;
+    border-radius: 17px;
+    font-size: 20px;
+    font-family: sans-serif;
+    text-align: center;
+    transition: box-shadow 200ms ease, background-color 200ms ease-in-out;
+    background-color: rgb(247, 226, 223);
+    color: rgb(0, 0, 0);
+    border: none;
+
+    transition: .3s;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: absolute; /* Изменено на absolute для более точного позиционирования */
+    top: 20px; /* Регулируйте значение в зависимости от потребностей */
+    right: 20px; /* Размещение в правом верхнем углу */
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    border-radius: 17px;
+    background-color: #181a1a;
+    color: rgb(247, 226, 223);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #ffdfdb;
+    text-align: center;
+    line-height: 40px;
+    font-family: sans-serif;
+    font-size: 20px;
+    width: 100px;
+    height: 40px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    border-radius: 17px;
+    background-color: rgb(0, 0, 0);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    border-radius: 17px;
+    background-color: white;
+    box-shadow: #fff8 0 0 10px;
+    transform: translateY(-7px);
 }

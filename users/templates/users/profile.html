@@ -7,18 +7,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'CSS/profile.css' %}">
-
 </head>
 
 <body>
-    <div class="login-container">
-        <h1>Profile</h1>
-        <form action="{% url 'user:profile' %}" method="post">
-            {% csrf_token %}
-            <input class="standard-input" type="text" id="id_username" name="username" placeholder="Username" required>
-            <input class="standard-input" type="text" id="id_email" name="email" placeholder="email" required>
-            <button type="submit">Save & Change</button>
-        </form>
+    <!-- Контейнер для всего содержимого -->
+    <div class="main-container">
+        <!-- Контейнер для формы профиля -->
+        <div class="login-container">
+            <h1>Profile</h1>
+            <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if user.image %}
+                <p><img src="{{ user.image.url }}" alt="Аватар пользователя"></p>
+                {% else %}
+                <p><img src="{% static 'images/baseavatar.jpeg' %}" alt="Аватар пользователя"></p>
+                {% endif %}
+                <input class="standard-input" type="text" id="id_username" name="username" placeholder="Username" value="{{ form.username.value }}" required>
+                {% if form.username.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show">{{form.username.errors}}</div>
+                {% endif %}
+                <input class="standard-input" type="text" id="id_email" name="email" placeholder="Email" value="{{ form.email.value }}" required>
+                {% if form.email.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                {% endif %}
+                <button class="btn" type="submit">Change & Save</button>
+            </form>
+        </div>
+
     </div>
+            <!-- Dropdown меню, перемещаем его внутрь body -->
+        <div class="flexrow-container">
+            <div class="dropdown">
+                <button class="dropbtn">{{ user.username }}</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'main:index' %}">Home</a>
+                    {% if user.is_admin or user.is_staff %}
+                    <a href="{% url 'admin:index' %}">Admin</a>
+                    {% endif %}
+                    <a href="{% url 'user:logout' %}">Logout</a>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
