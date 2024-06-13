@@ -1,10 +1,12 @@
 from django.contrib import auth, messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
-from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm, UserPasswordChangeForm
 from main.models import ToDoNote
 
 from .models import User
@@ -30,7 +32,7 @@ def login(request):
         form = UserLoginForm()
 
     context = {
-        'title': 'Авторизация',
+        'title': 'Login',
         'form': form,
     }
     return render(request, template_name='users/login.html', context=context)
@@ -51,7 +53,7 @@ def registration(request):
         form = UserRegistrationForm()
 
     context = {
-        'title': 'Регистрация',
+        'title': 'Registration',
         'form': form
     }
     return render(request=request, template_name='users/registration.html', context=context)
@@ -69,7 +71,8 @@ def profile(request):
 
     form = UserProfileForm(instance=user)
     context = {
-        'form': form
+        'form': form,
+        'title': 'Profile'
     }
     return render(request=request, template_name='users/profile.html', context=context)
 
@@ -78,3 +81,22 @@ def profile(request):
 def logout(request):
     auth.logout(request)
     return redirect('main:index')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = UserPasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('user:profile')
+
+    else:
+        form = UserPasswordChangeForm(user=request.user)
+
+    context = {
+        'form': form,
+        'title': 'Change Password'
+    }
+
+    return render(request=request, template_name='users/password_change_form.html', context=context)

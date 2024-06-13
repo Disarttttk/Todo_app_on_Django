@@ -106,3 +106,8 @@ button:hover {
         top: 50px;
     }
 }
+
+.form-error {
+    padding: -10px;
+    color: #CC0000;
+}

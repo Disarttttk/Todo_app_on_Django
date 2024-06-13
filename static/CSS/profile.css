@@ -185,3 +185,24 @@ form input.standard-input:hover {
     box-shadow: #fff8 0 0 10px;
     transform: translateY(-7px);
 }
+
+
+a {
+    color: grey;
+    text-decoration: none;
+    padding-top: 15px;
+}
+
+/* profile.css или другой файл CSS */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.success {
+    background-color: green;
+    color: #3c763d;
+}
+
+/* Другие стили для других типов сообщений (warning, error и т.д.) */

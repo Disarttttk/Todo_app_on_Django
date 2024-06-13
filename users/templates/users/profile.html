@@ -10,6 +10,9 @@
 </head>
 
 <body>
+
+
+
     <!-- Контейнер для всего содержимого -->
     <div class="main-container">
         <!-- Контейнер для формы профиля -->
@@ -31,6 +34,7 @@
                     <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
                 {% endif %}
                 <button class="btn" type="submit">Change & Save</button>
+                <a href="{% url 'user:password_change' %}">Change password</a>
             </form>
         </div>
 

@@ -15,8 +15,15 @@
         <h1>Login</h1>
         <form action="{% url 'user:login' %}" method="post">
             {% csrf_token %}
+            {{ form.non_field_errors }}
             <input class="standard-input" type="text" id="id_username" name="username" placeholder="Username" required>
+            {% if form.username.errors %}
+            <div class="alert">{{ form.username.errors }}</div>
+            {% endif %}
             <input class="standard-input" type="password" id="id_password" name="password" placeholder="Password" required>
+            {% if form.password.errors %}
+            <div class="alert">{{ form.password.errors }}</div>
+            {% endif %}
             <button type="submit">Login</button>
         </form>
     </div>
