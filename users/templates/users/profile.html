@@ -20,8 +20,8 @@
             <h1>Profile</h1>
             <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% if user.image %}
-                <p><img src="{{ user.image.url }}" alt="Аватар пользователя"></p>
+                {% if user.images %}
+                <p><img src="{{ user.images.url }}" alt="Аватар пользователя"></p>
                 {% else %}
                 <p><img src="{% static 'images/baseavatar.jpeg' %}" alt="Аватар пользователя"></p>
                 {% endif %}

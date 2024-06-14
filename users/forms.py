@@ -10,6 +10,12 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField()
     password = forms.CharField()
 
+    error_messages = {
+        'invalid_login': (
+            "Неверное имя пользователя или пароль. Попробуйте ещё раз."
+        )
+    }
+
     class Meta:
         model = User
         fields = ['username', 'password']
@@ -39,14 +45,14 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserProfileForm(UserChangeForm):
-    image = forms.ImageField(required=False)
+    images = forms.ImageField(required=False)
     username = forms.CharField()
     email = forms.CharField()
 
     class Meta:
         model = User
         fields = (
-            'image',
+            'images',
             'username',
             'email'
         )
